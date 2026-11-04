@@ -1,0 +1,5 @@
+# Dominio canónico: sin www
+https://www.automatizahoy.com.ar/*  https://automatizahoy.com.ar/:splat  301!
+
+# Evita que se indexe /index.html como URL duplicada
+/index.html  /  301!

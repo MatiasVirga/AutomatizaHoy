@@ -1,0 +1,17 @@
+# ── Artefactos de build ───────────────────────────────────────────────────
+dist/
+
+# ── Dependencias ──────────────────────────────────────────────────────────
+node_modules/
+
+# ── Carpetas internas (no se publican) ────────────────────────────────────
+Contenido/   # archivos de trabajo para redes sociales
+brand/       # assets de identidad / diseño (no son del sitio)
+docs/        # documentación interna y material de referencia
+scripts/     # scripts de build y utilidades locales
+
+# ── Sistema ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
