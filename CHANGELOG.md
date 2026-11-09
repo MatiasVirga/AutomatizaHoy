@@ -3,7 +3,24 @@
 Todos los cambios relevantes del sitio. Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/),
 versionado semántico.
 
-## [1.2.0] — 2026-11-01
+## [1.3.0] — 2026-11-09
+
+### Agregado
+- **Isotipo oficial de marca**: Nuevo isotipo recortado en alta fidelidad (`assets/img/isotipo.webp`) en el navbar y footer, dentro de cápsula blanca de alto contraste.
+- **Favicon multiplataforma**: Generación de `favicon.ico`, `favicon-32x32.png`, `favicon-16x16.png` y `apple-touch-icon.png` con la identidad corporativa.
+- **Efecto Typewriter en el Hero**: Animación con cursor titilante en *"Tu negocio debería trabajar para vos,"*.
+- **Spotlight dinámico**: Efecto de luz reactivo a las coordenadas del cursor en tarjetas de servicios y casos reales.
+- **Aceleración exponencial (Quintic Easing)**: Desaceleración suave en los contadores numéricos al llegar a la meta.
+- **Seguridad CSP (Content-Security-Policy)**: Reglas en `_headers` que bloquean inyecciones de scripts/iframes de terceros (incluyendo marcas de agua forzadas).
+
+### Cambiado
+- **Automatización CI/CD**: Configurado `netlify.toml` con comando de build (`node scripts/build.mjs`) y directorio `dist`.
+- **Git & Repositorio**: Vinculado al repositorio remoto `git@github.com:MatiasVirga/AutomatizaHoy.git` bajo la cuenta `matias.virga@gmail.com`.
+- **Caso Excel**: Renombrada etiqueta a *"PLANILLA BARBERÍA"*.
+- **Alineación Footer**: Ícono de Instagram alineado en una sola línea con clase `.footer__link-icon`.
+
+### Eliminado
+- Referencias al correo electrónico temporal en el formulario, enlaces directos y schema JSON-LD, centralizando el canal de contacto en WhatsApp e Instagram.
 
 ### Agregado
 - Pasada responsive fina: ajustes para 520 px y 380 px, feedback táctil (`:active`), objetivos
