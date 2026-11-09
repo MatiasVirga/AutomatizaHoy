@@ -159,6 +159,41 @@ const CONFIG = {
     items.forEach((el) => io.observe(el));
   }
 
+  /* -------------------------------------------------- 4b. typewriter hero */
+  function initTypewriter() {
+    const el = $("#heroTypewriter");
+    if (!el || prefersReduced) return;
+
+    const fullText = el.textContent.trim();
+    el.textContent = "";
+
+    const cursor = document.createElement("span");
+    cursor.className = "hero__cursor";
+    cursor.setAttribute("aria-hidden", "true");
+    el.parentNode.insertBefore(cursor, el.nextSibling);
+
+    let idx = 0;
+    const speed = 42; // ms por carácter
+
+    const type = () => {
+      if (idx < fullText.length) {
+        el.textContent += fullText.charAt(idx);
+        idx++;
+        setTimeout(type, speed);
+      } else {
+        // Al terminar, dejamos que el cursor titile un momento y luego lo ocultamos suave
+        setTimeout(() => {
+          cursor.style.transition = "opacity 0.6s ease";
+          cursor.style.opacity = "0";
+          setTimeout(() => cursor.remove(), 600);
+        }, 2400);
+      }
+    };
+
+    // Pequeño delay inicial para que coordine con la entrada del hero
+    setTimeout(type, 350);
+  }
+
   /* ---------------------------------------------------- 5. contadores ---- */
   function initCounters() {
     const nodes = $$("[data-count]");
@@ -170,12 +205,13 @@ const CONFIG = {
         el.textContent = String(target);
         return;
       }
-      const duration = 1500;
+      const duration = 1800;
       const start = performance.now();
 
       const tick = (now) => {
         const p = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
+        // Curva suave exponencial (quintic out)
+        const eased = 1 - Math.pow(1 - p, 5);
         el.textContent = String(Math.round(target * eased));
         if (p < 1) requestAnimationFrame(tick);
       };
@@ -476,6 +512,7 @@ const CONFIG = {
     initScrollUI();
     initMobileMenu();
     initReveal();
+    initTypewriter();
     initCounters();
     initAccordion();
     initSpotlight();

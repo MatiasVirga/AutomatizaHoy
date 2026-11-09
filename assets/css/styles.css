@@ -592,6 +592,26 @@ ol { list-style: none; }
   text-wrap: balance;
 }
 
+.hero__typewriter {
+  display: inline;
+}
+
+.hero__cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.88em;
+  vertical-align: -0.05em;
+  margin-left: 2px;
+  background-color: var(--red-2, #E11D3C);
+  border-radius: 2px;
+  animation: blinkCursor 0.85s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .grad {
   background: linear-gradient(100deg, #FF6B81, var(--red) 52%, #FF9A5A);
   -webkit-background-clip: text;
@@ -961,15 +981,23 @@ ol { list-style: none; }
   transition: transform .45s var(--ease), box-shadow .45s, border-color .45s;
 }
 
-.svc::before {
+.svc::before,
+.case::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%),
-              rgba(200, 16, 46, .07), transparent 62%);
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%),
+              rgba(200, 16, 46, .13), transparent 65%);
   opacity: 0;
-  transition: opacity .45s;
+  transition: opacity .4s ease;
   pointer-events: none;
+  z-index: 1;
+}
+
+.case::before {
+  background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 0%),
+              rgba(255, 255, 255, .08), transparent 65%);
 }
 
 .svc:hover {
@@ -978,7 +1006,8 @@ ol { list-style: none; }
   box-shadow: var(--shadow-card);
 }
 
-.svc:hover::before { opacity: 1; }
+.svc:hover::before,
+.case:hover::before { opacity: 1; }
 
 .svc--wide { grid-column: span 2; min-height: 320px; }
 

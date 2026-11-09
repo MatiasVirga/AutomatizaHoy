@@ -27,16 +27,17 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://automatizahoy.com.ar/assets/img/og.png">
 
-  <link rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C8102E'/%3E%3Cpath d='M18 5 9 18h5l-1 9 10-13h-5l1-9z' fill='%23fff'/%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=1.0.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=1.0.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png?v=1.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png?v=1.0.2">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=1.0.1">
+  <link rel="stylesheet" href="assets/css/styles.css?v=1.0.2">
   <noscript>
     <style>
       [data-reveal] {
@@ -211,7 +212,7 @@
           </p>
 
           <h1 class="hero__title" data-reveal style="--d:1">
-            Tu negocio debería trabajar para vos,
+            <span class="hero__typewriter" id="heroTypewriter">Tu negocio debería trabajar para vos,</span>
             <span class="grad">no al revés.</span>
           </h1>
 
@@ -548,7 +549,7 @@
           ============================================================
           -->
 
-          <article class="case case--barber" data-reveal>
+          <article class="case case--barber" data-spotlight data-reveal>
             <a class="case__media" href="https://barberfort.com.ar" target="_blank" rel="noopener" aria-label="Abrir el sitio de Barber Fort en una pestaña nueva">
               <div class="browser">
                 <div class="browser__top">
@@ -597,7 +598,7 @@
           </article>
 
           <!-- CASO 2 · Citroën Martin Ortiga -->
-          <article class="case case--citroen" data-reveal style="--d:1">
+          <article class="case case--citroen" data-spotlight data-reveal style="--d:1">
             <a class="case__media" href="https://citroenmartinortiga.ar/" target="_blank" rel="noopener"
               aria-label="Abrir el sitio de Citroën Martin Ortiga en una pestaña nueva">
               <div class="browser">
@@ -665,7 +666,7 @@
           </article>
 
           <!-- CASO 3: EXCEL -->
-          <article class="case case--wide case--excel" data-reveal>
+          <article class="case case--wide case--excel" data-spotlight data-reveal>
             <div class="case__media case__media--excel">
               <div class="excel-tabs" role="tablist" aria-label="Vistas del Excel de Barber Fort">
                 <button class="excel-tab is-active" id="tabPlanilla" role="tab" aria-selected="true"
@@ -1048,7 +1049,7 @@
     <span class="wa-float__tooltip">¿Hablamos?</span>
   </a>
 
-  <script src="assets/js/main.js?v=1.0.1" defer></script>
+  <script src="assets/js/main.js?v=1.0.2" defer></script>
 </body>
 
 </html>
