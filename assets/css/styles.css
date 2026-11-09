@@ -2154,6 +2154,18 @@ ol { list-style: none; }
   transition: color .25s;
 }
 
+.footer__col a.footer__link-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.footer__col a.footer__link-icon .icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
 .footer__col a:hover { color: #fff; }
 
 .footer__bottom {
