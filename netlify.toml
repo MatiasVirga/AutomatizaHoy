@@ -1,6 +1,6 @@
 [build]
-  publish = "."
-  ignore  = "exit 0"   # sin build step, solo archivos estáticos
+  command = "node scripts/build.mjs"
+  publish = "dist"
 
 # ── Bloquear carpetas internas (devuelven 404 si alguien adivina la URL) ──
 
