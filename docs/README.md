@@ -18,6 +18,7 @@ entender qué hay, cómo se toca y por qué está hecho así.
 - Todo el contenido está escrito a mano en `index.html`.
 - El único dato "vivo" es la configuración de WhatsApp y email en `assets/js/main.js`.
 - Los casos muestran dos sitios en producción y un comparador antes/después de un Excel.
+- Hay una sección de producto (porta reseñas NFC) con placas que giran al tocarlas.
 - No hay base de datos: el formulario arma un mensaje de WhatsApp o un mail.
 - No hay analytics ni cookies de terceros (solo Google Fonts).
 - Los íconos son SVG inline: no hay Font Awesome ni Tailwind por CDN.

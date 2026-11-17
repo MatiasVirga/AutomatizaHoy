@@ -500,7 +500,17 @@ const CONFIG = {
     });
   }
 
-  /* ------------------------------------------------------ 11. año -------- */
+  /* --------------------------------- 11. porta reseñas: giro del dorso ---- */
+  function initPortaFlip() {
+    $$(".porta__flip").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const flipped = btn.classList.toggle("is-flipped");
+        btn.setAttribute("aria-pressed", String(flipped));
+      });
+    });
+  }
+
+  /* ------------------------------------------------------ 12. año -------- */
   function initYear() {
     const el = $("#year");
     if (el) el.textContent = String(new Date().getFullYear());
@@ -519,6 +529,7 @@ const CONFIG = {
     initCompare();
     initActiveLink();
     initForm();
+    initPortaFlip();
     initToTop();
     initYear();
   }

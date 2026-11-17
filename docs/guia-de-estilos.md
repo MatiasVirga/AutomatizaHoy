@@ -103,8 +103,24 @@ En móvil se reemplazan los links por `.burger` y `.mobile-menu` a pantalla comp
 
 ### Comparador (`.cmp`)
 
-Marco blanco con dos imágenes superpuestas, etiquetas **Antes / Después**, línea con círculo y
-un `range` invisible encima. Las pestañas (`.excel-tab`) cambian de vista.
+Marco blanco con dos imágenes superpuestas, etiquetas **Antes / Después**, línea divisoria y un
+`range` invisible encima. Las pestañas (`.excel-tab`) cambian de vista.
+
+La línea va en `--red` con borde blanco de 1,5 px y el tirador es un círculo rojo de 46 px con
+anillo blanco: sobre una planilla blanca, una línea blanca desaparece. Mientras nadie interactúa, un
+halo pulsa alrededor del tirador y la pista dice "Arrastrá la línea".
+
+### Porta reseñas (`.porta`)
+
+- `.porta__glass` — marco de acrílico en CSS: degradés translúcidos, brillo diagonal (`::before`) y
+  espesor de la placa (`::after`). Se inclina 7°/−8° y se endereza al hover.
+- `.porta__flip` — botón que gira; adentro `.porta__inner` con `preserve-3d` y dos caras con
+  `backface-visibility: hidden`.
+- `.porta__face--front` — el arte impreso (WebP 2:3).
+- `.porta__face--dark` / `--light` — el dorso del acrílico, según la placa.
+- `.porta__chip` — el sticker NFC: disco oscuro con anillo dorado. Va al 71 % del ancho (el dorso
+  está espejado: ese es el punto físico detrás del apoyo) y a la altura de la zona de apoyo.
+- `.porta__hint` — circulito con flecha de giro en la esquina.
 
 ### Acordeón (`.acc`)
 
@@ -126,6 +142,8 @@ con borde rojo y fondo rosado; nota inferior con estado `is-error` / `is-ok`.
 | Contadores | 1,5 s con easing cúbico |
 | Marquee | 42 s lineal, loop infinito |
 | Invitación del comparador | 1,8 s, una sola vez |
+| Halo del comparador | 2,6 s en loop hasta el primer toque |
+| Giro de la placa | `rotateY(180deg)`, 0,8 s |
 
 Easing estándar: `--ease: cubic-bezier(.22, 1, .36, 1)`. Todo se anula con
 `prefers-reduced-motion: reduce`.

@@ -27,17 +27,17 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://automatizahoy.com.ar/assets/img/og.png">
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico?v=1.0.2">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=1.0.2">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png?v=1.0.2">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png?v=1.0.2">
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=1.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=1.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png?v=1.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png?v=1.4.0">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=1.0.2">
+  <link rel="stylesheet" href="assets/css/styles.css?v=1.4.0">
   <noscript>
     <style>
       [data-reveal] {
@@ -108,6 +108,13 @@
       <rect x="15" y="3" width="6" height="6" rx="1" />
       <rect x="3" y="15" width="6" height="6" rx="1" />
       <path d="M15 15h2v2h-2zM19 15h2M15 19h2M19 19h2v2h-2z" />
+    </symbol>
+    <symbol id="i-flip" viewBox="0 0 24 24">
+      <path d="M20 12a8 8 0 1 1-2.6-5.9" />
+      <path d="M20 3.8v4.4h-4.4" />
+    </symbol>
+    <symbol id="i-waves" viewBox="0 0 24 24">
+      <path d="M7.5 8.6a5 5 0 0 1 0 6.8M11.4 5.8a9 9 0 0 1 0 12.4M15.3 3a13 13 0 0 1 0 18" />
     </symbol>
     <symbol id="i-star" viewBox="0 0 24 24">
       <path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z" />
@@ -475,7 +482,177 @@
                   <use href="#i-check" />
                 </svg> Seguimiento de reseñas</li>
             </ul>
+            <a class="svc__link" href="#porta-resenas">Ver los porta reseñas
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-arrow" />
+              </svg>
+            </a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PORTA RESEÑAS ================= -->
+    <section class="section section--dark" id="porta-resenas">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow" data-reveal><span class="eyebrow__dot" aria-hidden="true"></span> Producto · Porta
+            reseñas</p>
+          <h2 class="section__title" data-reveal style="--d:1">Un porta reseñas<br>con la cara de tu negocio.</h2>
+          <p class="section__sub section__sub--dark" data-reveal style="--d:2">
+            Acrílico de 3 mm, tarjeta impresa y chip NFC. El cliente apoya el celular o escanea el QR
+            y llega derecho a tu ficha de Google, tu WhatsApp o tu Instagram. Tres estilos de fábrica
+            o uno con tu logo, tus colores y tu QR. Tocá cualquiera para darle la vuelta: atrás va
+            pegado el chip.
+          </p>
+        </header>
+
+        <div class="porta-grid">
+          <!-- Personalizado · Barber Fort -->
+          <figure class="porta" data-reveal>
+            <div class="porta__glass">
+              <button class="porta__flip" type="button" aria-pressed="false"
+                aria-label="Dar vuelta la tarjeta para ver el dorso, donde va pegado el chip NFC">
+                <span class="porta__inner">
+                  <img class="porta__face porta__face--front" src="assets/img/porta/barberfort.webp"
+                    alt="Tarjeta de Barber Fort para el porta reseñas: negro y dorado, con su QR y su arroba" width="800" height="1200" loading="lazy" decoding="async">
+                  <span class="porta__face porta__face--back porta__face--dark" aria-hidden="true">
+                    <span class="porta__chip">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-waves" />
+                      </svg>
+                      <b>NFC</b>
+                    </span>
+                  </span>
+                </span>
+                <span class="porta__hint" aria-hidden="true">
+                  <svg class="icon">
+                    <use href="#i-flip" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <figcaption class="porta__cap">
+              <span class="porta__tag porta__tag--gold">Personalizado</span>
+              <strong>Barber Fort</strong>
+              <span class="porta__desc">Negro y dorado, con su QR y su Instagram.</span>
+            </figcaption>
+          </figure>
+
+          <!-- Estilo base · Google -->
+          <figure class="porta" data-reveal style="--d:1">
+            <div class="porta__glass">
+              <button class="porta__flip" type="button" aria-pressed="false"
+                aria-label="Dar vuelta la tarjeta para ver el dorso, donde va pegado el chip NFC">
+                <span class="porta__inner">
+                  <img class="porta__face porta__face--front" src="assets/img/porta/google.webp"
+                    alt="Tarjeta del porta reseñas para pedir reseñas de Google: cinco estrellas y QR" width="800" height="1200" loading="lazy" decoding="async">
+                  <span class="porta__face porta__face--back porta__face--light" aria-hidden="true">
+                    <span class="porta__chip">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-waves" />
+                      </svg>
+                      <b>NFC</b>
+                    </span>
+                  </span>
+                </span>
+                <span class="porta__hint" aria-hidden="true">
+                  <svg class="icon">
+                    <use href="#i-flip" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <figcaption class="porta__cap">
+              <span class="porta__tag">Estilo base</span>
+              <strong>Reseñas de Google</strong>
+              <span class="porta__desc">El que más piden: cinco estrellas y ficha de Google.</span>
+            </figcaption>
+          </figure>
+
+          <!-- Estilo base · WhatsApp -->
+          <figure class="porta" data-reveal style="--d:2">
+            <div class="porta__glass">
+              <button class="porta__flip" type="button" aria-pressed="false"
+                aria-label="Dar vuelta la tarjeta para ver el dorso, donde va pegado el chip NFC">
+                <span class="porta__inner">
+                  <img class="porta__face porta__face--front" src="assets/img/porta/whatsapp.webp"
+                    alt="Tarjeta del porta reseñas para escribir por WhatsApp, con QR y apoyo NFC" width="800" height="1200" loading="lazy" decoding="async">
+                  <span class="porta__face porta__face--back porta__face--light" aria-hidden="true">
+                    <span class="porta__chip">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-waves" />
+                      </svg>
+                      <b>NFC</b>
+                    </span>
+                  </span>
+                </span>
+                <span class="porta__hint" aria-hidden="true">
+                  <svg class="icon">
+                    <use href="#i-flip" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <figcaption class="porta__cap">
+              <span class="porta__tag">Estilo base</span>
+              <strong>Contacto directo</strong>
+              <span class="porta__desc">Abre el chat con el mensaje ya escrito.</span>
+            </figcaption>
+          </figure>
+
+          <!-- Estilo base · Instagram -->
+          <figure class="porta" data-reveal style="--d:3">
+            <div class="porta__glass">
+              <button class="porta__flip" type="button" aria-pressed="false"
+                aria-label="Dar vuelta la tarjeta para ver el dorso, donde va pegado el chip NFC">
+                <span class="porta__inner">
+                  <img class="porta__face porta__face--front" src="assets/img/porta/instagram.webp"
+                    alt="Tarjeta del porta reseñas para seguir el Instagram del local, con QR y apoyo NFC" width="800" height="1200" loading="lazy" decoding="async">
+                  <span class="porta__face porta__face--back porta__face--light" aria-hidden="true">
+                    <span class="porta__chip">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-waves" />
+                      </svg>
+                      <b>NFC</b>
+                    </span>
+                  </span>
+                </span>
+                <span class="porta__hint" aria-hidden="true">
+                  <svg class="icon">
+                    <use href="#i-flip" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <figcaption class="porta__cap">
+              <span class="porta__tag">Estilo base</span>
+              <strong>Instagram</strong>
+              <span class="porta__desc">Para sumar seguidores desde el mostrador.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <ul class="porta-specs" data-reveal>
+          <li><b>NFC + QR</b><span>Dos formas de llegar: apoyar o escanear.</span></li>
+          <li><b>Acrílico de 3 mm</b><span>Dos placas: la impresión queda encerrada.</span></li>
+          <li><b>≈ 8 × 12 cm</b><span>Entra en cualquier mostrador o caja.</span></li>
+          <li><b>A tu medida</b><span>Tu logo, tus colores, tu QR y tu arroba.</span></li>
+        </ul>
+
+        <div class="porta-cta" data-reveal>
+          <div>
+            <h3>¿Lo querés con tu marca?</h3>
+            <p>Mandanos tu logo y te devolvemos una prueba del diseño antes de imprimir. Precio y
+              envío los coordinamos por WhatsApp.</p>
+          </div>
+          <a class="btn btn--primary btn--lg" data-wa
+            data-wa-msg="¡Hola! Quiero un porta reseñas con mi marca. Te paso el logo y los colores.">
+            <svg class="icon icon--solid" aria-hidden="true">
+              <use href="#i-wa" />
+            </svg>
+            Pedir el mío
+          </a>
         </div>
       </div>
     </section>
@@ -690,7 +867,7 @@
                     <path d="m9 6-5 6 5 6M15 6l5 6-5 6" />
                   </svg>
                 </div>
-                <span class="cmp__hint">Arrastrá para comparar</span>
+                <span class="cmp__hint">Arrastrá la línea</span>
                 <input class="cmp__range" type="range" min="0" max="100" value="50" step="1"
                   aria-label="Comparar la planilla diaria antes y después">
               </div>
@@ -698,11 +875,11 @@
               <div class="cmp cmp--resumen" id="cmpResumen" role="tabpanel" aria-labelledby="tabResumen" data-compare
                 hidden>
                 <img src="assets/img/excel/resumen-antes.png"
-                  alt="Resumen viejo: tres celdas negras con suma total del mes, recaudado y gastos, todas en cero"
-                  width="742" height="629" loading="lazy" decoding="async">
+                  alt="Resumen viejo: tres celdas negras con la suma total del mes, lo recaudado y los gastos, todo en cero"
+                  width="420" height="356" loading="lazy" decoding="async">
                 <div class="cmp__after">
                   <img src="assets/img/excel/resumen-despues.png"
-                    alt="Resumen nuevo: tabla por semana con turnos, cortes, efectivo y Mercado Pago por barbero"
+                    alt="Resumen nuevo: una tabla por semana con turnos cortados, corte más barba, efectivo y Mercado Pago por barbero"
                     width="1006" height="853" loading="lazy" decoding="async">
                 </div>
                 <span class="cmp__label">Antes</span>
@@ -712,7 +889,7 @@
                     <path d="m9 6-5 6 5 6M15 6l5 6-5 6" />
                   </svg>
                 </div>
-                <span class="cmp__hint">Arrastrá para comparar</span>
+                <span class="cmp__hint">Arrastrá la línea</span>
                 <input class="cmp__range" type="range" min="0" max="100" value="50" step="1"
                   aria-label="Comparar el resumen semanal antes y después">
               </div>
@@ -1042,7 +1219,7 @@
     <span class="wa-float__tooltip">¿Hablamos?</span>
   </a>
 
-  <script src="assets/js/main.js?v=1.0.2" defer></script>
+  <script src="assets/js/main.js?v=1.4.0" defer></script>
 </body>
 
 </html>

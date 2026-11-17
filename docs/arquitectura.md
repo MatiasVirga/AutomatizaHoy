@@ -28,11 +28,17 @@ AutomatizaHoy/
 │       ├── barberfort-logo.webp
 │       ├── citroen-hero.webp
 │       ├── citroen-logo.webp
+│       ├── qr/                    # QR del porta reseñas (SVG generados)
+│       ├── porta/                 # Arte de las cuatro placas (WebP 800x1200)
 │       └── excel/
 │           ├── planilla-antes.png
 │           ├── planilla-despues.png
 │           ├── resumen-antes.png
 │           └── resumen-despues.png
+├── scripts/
+│   ├── build.mjs                 # Arma dist/ con lo que se publica
+│   ├── gen-qr.mjs                # Genera los SVG de assets/img/qr/
+│   └── verify-qr.mjs             # Comprueba el generador contra uno externo
 └── docs/
     ├── README.md               # Índice de esta documentación
     ├── arquitectura.md
@@ -93,14 +99,16 @@ Convención de nombres tipo BEM simplificado: `.bloque`, `.bloque__elemento`,
 | 2 | `initScrollUI` | Nav compacta al scrollear + barra de progreso de lectura |
 | 3 | `initMobileMenu` | Abre/cierra el menú, bloquea el scroll, cierra con `Esc` o al tocar un link |
 | 4 | `initReveal` | `IntersectionObserver` para el fade-up de `[data-reveal]`, con retardo por `--d` |
-| 5 | `initCounters` | Anima los `[data-count]` cuando entran en pantalla |
-| 6 | `initAccordion` | Acordeón con animación de altura y `aria-expanded` |
-| 7 | `initSpotlight` | Mueve un halo con `--mx`/`--my` en las tarjetas con `[data-spotlight]` |
-| 8 | `initCompare` | Comparador antes/después: `--pos`, pestañas y animación de invitación |
-| 9 | `initActiveLink` | Marca en el nav la sección visible |
-| 10 | `initForm` | Valida nombre y consulta, arma el mensaje y lo abre en WhatsApp o mail |
-| 11 | `initToTop` | Botón "volver arriba" |
-| 12 | `initYear` | Escribe el año actual en el footer |
+| 5 | `initTypewriter` | Escribe el título del hero con cursor titilante, una sola vez |
+| 6 | `initCounters` | Anima los `[data-count]` cuando entran en pantalla |
+| 7 | `initAccordion` | Acordeón con animación de altura y `aria-expanded` |
+| 8 | `initSpotlight` | Mueve un halo con `--mx`/`--my` en las tarjetas con `[data-spotlight]` |
+| 9 | `initCompare` | Comparador antes/después: `--pos`, pestañas y animación de invitación |
+| 10 | `initActiveLink` | Marca en el nav la sección visible |
+| 11 | `initForm` | Valida nombre y consulta, arma el mensaje y lo abre en WhatsApp o mail |
+| 12 | `initPortaFlip` | Gira las placas del porta reseñas y actualiza `aria-pressed` |
+| 13 | `initToTop` | Botón "volver arriba" |
+| 14 | `initYear` | Escribe el año actual en el footer |
 
 ### Configuración
 
@@ -137,6 +145,9 @@ Cada bloque `[data-compare]` tiene:
   `clip-path: inset(0 0 0 var(--pos))`, así que la capa de "después" se descubre desde la derecha.
 - Las pestañas (`.excel-tab`) muestran un panel y ocultan el otro con `hidden`, actualizando
   `aria-selected`; se pueden manejar con las flechas del teclado.
+- Las dos vistas son comparadores. La línea divisoria va en rojo con borde blanco y un halo que
+  pulsa hasta el primer toque: sobre una planilla clara, una línea blanca no se ve y nadie entiende
+  que hay que arrastrar.
 - La animación de invitación corre una vez por panel cuando entra al 55 % del viewport, se
   cancela si el usuario interactúa y no corre con `prefers-reduced-motion`.
 
@@ -148,10 +159,39 @@ Cada bloque `[data-compare]` tiene:
 | Agregar un caso | Copiar un `<article class="case">` y (si es ancho) sumar `.case--wide` |
 | Agregar un servicio | Copiar un `<article class="svc">` dentro de `.bento` |
 | Cambiar un ícono | Editar/crear un `<symbol>` en el sprite del inicio del `body` |
+| Agregar una tarjeta de porta reseñas | Copiar un `<figure class="porta">` y apuntar el `src` a la placa nueva |
+| Cambiar a dónde apunta un QR | Editar `TARGETS` en `scripts/gen-qr.mjs` y volver a correrlo |
 | Cambiar un color global | Variable en `:root` (por ejemplo `--red`) |
 | Cambiar el número de WhatsApp | `CONFIG.whatsapp` en `main.js` |
 
 Los snippets completos están en el [manual de contenido](manual-de-contenido.md).
+
+### El porta reseñas: acrílico en CSS, arte en imagen
+
+La sección `#porta-resenas` combina dos capas. El **marco de acrílico** es CSS: degradés
+translúcidos, un brillo diagonal en `::before` y el espesor de la placa en `::after`. La **placa
+impresa** es una imagen WebP de 800 × 1200 (`assets/img/porta/`) apoyada adentro del marco, con
+sombra propia para que no parezca un rectángulo pegado.
+
+Así, el arte final se ve nítido —sin los rayones ni los reflejos de las fotos del mostrador— y
+cambiar el diseño de un cliente es reemplazar un archivo, no tocar CSS. La inclinación sale de
+`perspective` + `rotateX/rotateY` sobre el marco y se apaga en móvil.
+
+Cada placa es un **botón que gira**: `.porta__flip` aporta la perspectiva, `.porta__inner` tiene
+`transform-style: preserve-3d` y las dos caras van superpuestas con `backface-visibility: hidden`. Al
+tocar, `initPortaFlip()` agrega `.is-flipped` y el conjunto rota 180° en Y: adelante el arte
+impreso, atrás el acrílico trasero con el chip NFC pegado detrás del punto de apoyo. Como la cara
+trasera está espejada, el chip se posiciona al 71 % del ancho (el 29 % del frente visto del otro
+lado), que es exactamente donde el cliente apoya el celular. El marco de acrílico no gira
+(es simétrico), así que lo que da vuelta es la placa de adentro, no el mueble. El dorso se dibuja en
+CSS (`.porta__face--dark` o `--light` según la placa) y el chip se dimensiona en `cqw`, con
+`container-type: inline-size` en la cara trasera para que escale con la tarjeta.
+
+Los QR de `assets/img/qr/` salen de `scripts/gen-qr.mjs`, una implementación propia de la ISO/IEC
+18004 (modo byte, corrección L, versiones 2 a 4). Hoy la web muestra los QR impresos en el arte; los
+generados quedan para las placas de clientes y para el personalizador. `scripts/verify-qr.mjs`
+compara la matriz con la de un generador externo: si se toca el generador, ese test es la red de
+seguridad.
 
 ## 7. Performance
 
@@ -171,3 +211,5 @@ Los snippets completos están en el [manual de contenido](manual-de-contenido.md
   pruebas de DOM durante el desarrollo.
 - El formulario no guarda datos: deriva a WhatsApp o al cliente de correo (no hay backend).
 - No hay analítica instalada (si se agrega, conviene que sea sin cookies o con consentimiento).
+- Los QR de la demo de porta reseñas apuntan a `barberfort.com.ar`, al sitio, al WhatsApp y al
+  Instagram propios: son ejemplos reales, no los destinos de un cliente.

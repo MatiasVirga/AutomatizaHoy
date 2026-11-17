@@ -1107,6 +1107,22 @@ ol { list-style: none; }
   background: rgba(255, 255, 255, .2);
 }
 
+.svc__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--red);
+  text-decoration: none;
+  transition: gap .3s var(--ease), color .3s;
+}
+
+.svc__link .icon { width: 15px; height: 15px; }
+
+.svc__link:hover { gap: 12px; color: var(--red-2); }
+
 .hero-mini {
   display: flex;
   flex-direction: column;
@@ -1635,6 +1651,8 @@ ol { list-style: none; }
   --pos: 50%;
 }
 
+/* El resumen semanal se compara igual que la planilla; su caja tiene la
+   proporción de las capturas (1006 × 853). */
 .cmp--resumen { aspect-ratio: 1006 / 853; }
 
 .cmp[hidden] { display: none; }
@@ -1682,37 +1700,69 @@ ol { list-style: none; }
   background: rgba(200, 16, 46, .92);
 }
 
+/* La línea divisoria va en rojo con borde blanco: se ve tanto sobre la planilla
+   clara como sobre las franjas oscuras, y deja claro que se puede arrastrar. */
 .cmp__handle {
   position: absolute;
   top: 0;
   bottom: 0;
   left: var(--pos);
   z-index: 3;
-  width: 2px;
-  background: #fff;
-  box-shadow: 0 0 14px rgba(0, 0, 0, .45);
-  transform: translateX(-1px);
+  width: 3px;
+  background: var(--red);
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, .95),
+    0 0 18px rgba(200, 16, 46, .5);
+  transform: translateX(-1.5px);
   pointer-events: none;
 }
+
+/* Halo que invita a arrastrar; se apaga en el primer toque */
+.cmp__handle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .9);
+  animation: cmpPulse 2.6s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cmpPulse {
+  0% { transform: scale(1); opacity: .9; }
+  75%, 100% { transform: scale(1.6); opacity: 0; }
+}
+
+.cmp.is-touched .cmp__handle::after { display: none; }
 
 .cmp__grip {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 38px;
-  height: 38px;
-  padding: 11px;
+  width: 46px;
+  height: 46px;
+  padding: 13px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: #fff;
-  color: #0B0E13;
+  background: var(--red);
+  color: #fff;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2;
+  stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+  box-shadow:
+    0 0 0 3px #fff,
+    0 10px 24px rgba(0, 0, 0, .35),
+    0 0 22px rgba(200, 16, 46, .45);
 }
+
+.cmp:hover .cmp__grip { background: var(--red-2); }
 
 .cmp__hint {
   position: absolute;
@@ -2201,6 +2251,348 @@ ol { list-style: none; }
 }
 
 .to-top .icon { width: 17px; height: 17px; }
+
+/* ============================ 13. PORTA RESEÑAS ========================= */
+/* Las tarjetas están dibujadas en CSS (no son fotos): el acrílico es un marco
+   con degradés y brillo, y la tarjeta de adentro usa unidades de contenedor
+   (cqw) para escalar sin perder proporción a ningún ancho. */
+
+.porta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 30px);
+}
+
+.porta {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  perspective: 1500px;
+}
+
+/* --- El acrílico --- */
+.porta__glass {
+  position: relative;
+  padding: clamp(6px, .85vw, 10px);
+  border-radius: 16px;
+  background: linear-gradient(155deg,
+      rgba(255, 255, 255, .32) 0%,
+      rgba(255, 255, 255, .06) 26%,
+      rgba(255, 255, 255, .02) 64%,
+      rgba(255, 255, 255, .2) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .22),
+    inset 0 1px 0 rgba(255, 255, 255, .55),
+    0 24px 38px -22px rgba(0, 0, 0, .95);
+  transform: rotateX(7deg) rotateY(-8deg) rotateZ(.5deg);
+  transition: transform .55s var(--ease), box-shadow .55s var(--ease);
+}
+
+/* Brillo diagonal sobre el acrílico */
+.porta__glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background: linear-gradient(118deg,
+      rgba(255, 255, 255, 0) 28%,
+      rgba(255, 255, 255, .13) 42%,
+      rgba(255, 255, 255, .02) 51%,
+      rgba(255, 255, 255, 0) 63%);
+  pointer-events: none;
+}
+
+/* Espesor de la placa apoyada en la mesa */
+.porta__glass::after {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: -7px;
+  height: 14px;
+  z-index: 1;
+  border-radius: 0 0 11px 11px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .26), rgba(255, 255, 255, .02));
+}
+
+@media (hover: hover) and (min-width: 561px) {
+  .porta:hover .porta__glass {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-6px);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, .3),
+      inset 0 1px 0 rgba(255, 255, 255, .6),
+      0 34px 50px -24px rgba(0, 0, 0, .95);
+  }
+}
+
+/* --- La tarjeta impresa: gira para mostrar el dorso --- */
+.porta__flip {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  aspect-ratio: 2 / 3;
+  perspective: 1000px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.porta__inner {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform .8s var(--ease);
+}
+
+.porta__flip.is-flipped .porta__inner { transform: rotateY(180deg); }
+
+.porta__face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.porta__face--front {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+
+/* --- El dorso: acrílico con el chip pegado --- */
+/* El dorso está espejado respecto al frente, así que el chip va al 71 %: ese es
+   el punto que queda físicamente detrás de la zona de apoyo (29 % del frente). */
+.porta__face--back {
+  container-type: inline-size;
+  transform: rotateY(180deg);
+  display: block;
+}
+
+.porta__face--back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(118deg,
+      rgba(255, 255, 255, 0) 32%,
+      rgba(255, 255, 255, .12) 46%,
+      rgba(255, 255, 255, 0) 64%);
+  pointer-events: none;
+}
+
+.porta__face--dark {
+  background:
+    radial-gradient(120% 80% at 32% 18%, rgba(241, 218, 166, .13), transparent 62%),
+    linear-gradient(160deg, #17171B, #06060A 72%);
+  box-shadow: inset 0 0 0 1px rgba(241, 218, 166, .32);
+}
+
+.porta__face--light {
+  background: radial-gradient(120% 80% at 32% 18%, #FFFFFF, #E7EBF1 78%);
+  box-shadow: inset 0 0 0 1px rgba(20, 25, 35, .12);
+}
+
+.porta__chip {
+  position: absolute;
+  left: 71%;
+  top: 47%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .8cqw;
+  width: 30%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #2B3139, #0B0D10 72%);
+  box-shadow:
+    inset 0 0 0 1cqw rgba(241, 218, 166, .55),
+    0 1.4cqw 3cqw -1.2cqw rgba(0, 0, 0, .6);
+  color: #F1DAA6;
+  transform: translate(-50%, -50%) rotate(3deg);
+}
+
+/* En el dorso oscuro el disco se aclara un poco para despegarse del fondo */
+.porta__face--dark .porta__chip {
+  background: radial-gradient(circle at 34% 28%, #3C444D, #161A1F 74%);
+  box-shadow:
+    inset 0 0 0 1cqw rgba(241, 218, 166, .62),
+    0 0 0 .3cqw rgba(255, 255, 255, .07),
+    0 1.4cqw 3cqw -1.2cqw rgba(0, 0, 0, .75);
+  top: 44%;
+}
+
+/* Los estilos base tienen más aire arriba: el apoyo cae un poco más abajo */
+.porta__face--light .porta__chip { top: 51%; }
+
+.porta__chip .icon {
+  width: 9.5cqw;
+  height: 9.5cqw;
+  stroke-width: 2;
+  opacity: .92;
+}
+
+.porta__chip b {
+  font-size: 3.6cqw;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1;
+}
+
+/* Pista de "girar" */
+.porta__hint {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(11, 13, 16, .55);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: #F1DAA6;
+  backdrop-filter: blur(4px);
+  transition: transform .45s var(--ease), background .3s;
+}
+
+.porta__hint .icon { width: 13px; height: 13px; }
+
+.porta:hover .porta__hint {
+  transform: rotate(-180deg);
+  background: rgba(11, 13, 16, .78);
+}
+
+/* --- Epígrafe --- */
+.porta__cap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-inline: 2px;
+}
+
+.porta__tag {
+  align-self: flex-start;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #FF8B9C;
+}
+
+.porta__tag--gold { color: #F1DAA6; }
+
+.porta__cap strong {
+  font-family: "Sora", "Inter", sans-serif;
+  font-size: .96rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.porta__desc {
+  font-size: .82rem;
+  line-height: 1.5;
+  color: #9AA6B2;
+}
+
+/* --- Especificaciones --- */
+.porta-specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: clamp(34px, 4vw, 52px) 0 clamp(26px, 3.4vw, 38px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .1);
+  overflow: hidden;
+}
+
+.porta-specs li {
+  padding: 20px 18px;
+  background: var(--ink-2);
+}
+
+.porta-specs b {
+  display: block;
+  margin-bottom: 5px;
+  font-family: "Sora", "Inter", sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.porta-specs span {
+  font-size: .8rem;
+  line-height: 1.5;
+  color: #9AA6B2;
+}
+
+/* --- Cierre --- */
+.porta-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid rgba(241, 218, 166, .22);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(115deg, rgba(241, 218, 166, .09), rgba(255, 255, 255, .015) 62%);
+}
+
+.porta-cta h3 {
+  font-family: "Sora", "Inter", sans-serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 600;
+  color: #fff;
+}
+
+.porta-cta p {
+  margin-top: 7px;
+  max-width: 48ch;
+  font-size: .9rem;
+  line-height: 1.6;
+  color: #9AA6B2;
+}
+
+/* --- Responsive del componente --- */
+@media (max-width: 1000px) {
+  .porta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; }
+  .porta-specs { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .porta-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    max-width: 330px;
+    margin-inline: auto;
+  }
+
+  .porta { perspective: none; }
+
+  .porta__glass {
+    transform: none;
+    transition: box-shadow .3s var(--ease);
+  }
+
+  .porta__glass::after { display: none; }
+
+  .porta-specs { grid-template-columns: 1fr; }
+
+  .porta-cta { flex-direction: column; align-items: stretch; }
+  .porta-cta .btn { width: 100%; }
+}
 
 /* ============================ ANIMACIONES =============================== */
 [data-reveal] {

@@ -58,25 +58,26 @@ Los botones usan `target="_blank" rel="noopener"`: no quitar el `rel`.
 
 Archivos en `assets/img/excel/`:
 
-| Archivo | Qué muestra | Proporción actual |
+| Archivo | Qué muestra | Dónde se usa |
 |---|---|---|
-| `planilla-antes.png` | La planilla vieja | 16:9 (1919×1079) |
-| `planilla-despues.png` | La planilla nueva | 16:9 (1909×1079) |
-| `resumen-antes.png` | El resumen viejo | 1,18:1 (742×629) |
-| `resumen-despues.png` | El resumen nuevo | 1,18:1 (1006×853) |
+| `planilla-antes.png` | La planilla vieja | Comparador de "Planilla diaria" (1919×1079) |
+| `planilla-despues.png` | La planilla nueva | Comparador de "Planilla diaria" (1909×1079) |
+| `resumen-antes.png` | El resumen viejo | Comparador de "Resumen semanal" (420×356) |
+| `resumen-despues.png` | El resumen nuevo | Comparador de "Resumen semanal" (1006×853) |
 
 Recomendaciones:
 
-1. Capturá las dos versiones **con el mismo zoom y el mismo tamaño de ventana**.
-2. Recortá el par al mismo ratio; si no, al mover el comparador una imagen "salta" respecto de la
-   otra. La forma más rápida es recortar la que sobra (como se hizo con `resumen-antes.png`).
-3. Anonimizá: nombres de clientes, teléfonos, importes reales y nombre del archivo en la barra de
+1. Capturá las dos versiones de cada vista **con el mismo zoom y el mismo tamaño de ventana** y
+   recortá el par al mismo ratio; si no, al mover el comparador una imagen "salta" respecto de la
+   otra. Por eso `resumen-antes.png` está recortado al bloque de totales.
+2. Anonimizá: nombres de clientes, teléfonos, importes reales y nombre del archivo en la barra de
    título.
-4. Mantené el mismo nombre de archivo para no tocar el HTML. Si cambiás el nombre, actualizá el
-   `src` y el `alt`.
+3. Mantené el mismo nombre de archivo para no tocar el HTML. Si cambiás el nombre, actualizá el
+   `src`, el `alt` y el `width`/`height`.
 
 Para que el "después" se vea convincente, cargá 8–10 turnos de ejemplo antes de capturar: un
-tablero en $0 pierde fuerza al lado del "antes" lleno de datos.
+tablero en $0 pierde fuerza al lado del "antes" lleno de datos — y en el resumen semanal hoy se ven
+cinco semanas en cero.
 
 ## 5. Agregar un caso nuevo
 
@@ -144,9 +145,69 @@ La grilla `.bento` es de 3 columnas: si agregás una quinta tarjeta, revisá que
 
 Íconos disponibles en el sprite: `i-bolt`, `i-arrow`, `i-ext`, `i-check`, `i-chev`, `i-x`, `i-wa`,
 `i-cart`, `i-flow`, `i-bot`, `i-qr`, `i-star`, `i-mail`, `i-clock`, `i-up`, `i-spark`, `i-globe`,
-`i-menu`. Para crear uno nuevo, copiá un `<symbol>` y cambiá el `id`.
+`i-menu`, `i-ig`. Para crear uno nuevo, copiá un `<symbol>` y cambiá el `id`.
 
-## 7. Números y contadores
+## 7. Porta reseñas (producto)
+
+La sección `#porta-resenas` (después de Servicios) muestra el producto con cuatro placas: una
+personalizada (Barber Fort) y tres estilos base (Google, WhatsApp, Instagram).
+
+### Cambiar una placa por otra
+
+Cada placa es un `<figure class="porta">` con dos partes: la imagen del arte adentro del marco de
+acrílico (`.porta__glass`) y el epígrafe (`figcaption`).
+
+```html
+<figure class="porta" data-reveal>
+  <div class="porta__glass">
+    <img class="porta__art" src="assets/img/porta/barberfort.webp"
+      alt="Tarjeta de Barber Fort para el porta reseñas"
+      width="800" height="1200" loading="lazy" decoding="async">
+  </div>
+  <figcaption class="porta__cap">
+    <span class="porta__tag porta__tag--gold">Personalizado</span>
+    <strong>Barber Fort</strong>
+    <span class="porta__desc">Negro y dorado, con su QR y su Instagram.</span>
+  </figcaption>
+</figure>
+```
+
+Para reemplazar el arte: guardá la imagen en `assets/img/porta/` con proporción **2:3** (800 × 1200
+es suficiente) y actualizá el `src`, el `width`/`height` y el `alt` del `<img>`. El marco de
+acrílico es CSS: se adapta solo, no hay que tocarlo. El epígrafe va aparte, así que la misma placa
+puede cambiar de nombre sin reexportar nada.
+
+### El dorso y el giro
+
+Cada placa gira al tocarla y muestra el dorso, donde va pegado el chip NFC. El frente es la imagen
+del arte; el dorso está dibujado en CSS.
+
+- `porta__face--dark` (fondo negro, para Barber Fort) o `porta__face--light` (claro, para los
+  estilos base). Para una placa nueva, elegí el que combine con su arte.
+- El chip es `.porta__chip`: disco con anillo dorado y la palabra NFC. Va al **71 %** del ancho y a
+  la altura de la zona de apoyo (`top: 44%` en el dorso oscuro, `51%` en los claros). El 71 % no es
+  capricho: el dorso está espejado respecto al frente, así que ese es el punto que queda
+  físicamente detrás del apoyo (que en el frente está al 29 %).
+- El giro lo maneja `initPortaFlip()` en `main.js`: no hay que tocar el HTML para cambiar nada de
+  esto.
+- Sin JS la placa queda del lado del frente y el botón no hace nada (el dorso no se ve).
+
+### Los QR
+
+Los QR ya vienen impresos en el arte. Si necesitás generar uno nuevo (para la placa de un cliente),
+`scripts/gen-qr.mjs` produce el SVG listo para imprimir:
+
+1. Editá `TARGETS` en `scripts/gen-qr.mjs` con la URL de destino.
+2. Corré `node scripts/gen-qr.mjs`: escribe en `assets/img/qr/`.
+3. `node scripts/verify-qr.mjs` comprueba el generador contra uno externo.
+
+### Precio
+
+Hoy el cierre de la sección no muestra precio: dice que se coordina por WhatsApp. Si querés
+publicarlo, agregá un `<p>` debajo del `<h3>` de `.porta-cta` con el precio y un estilo corto en la
+sección 13 de `styles.css`. Conviene precio "desde" si hay variantes (acrílico, tamaño, con envío).
+
+## 8. Números y contadores
 
 ```html
 <b data-count="12">0</b>
@@ -156,11 +217,11 @@ El número del `data-count` es el valor final; el `0` es lo que se ve si el JS n
 formatear con separador de miles no hace falta nada hasta 999; por encima habría que tocar
 `initCounters`.
 
-## 8. Cambiar el año del footer
+## 9. Cambiar el año del footer
 
 Es automático (`#year` toma el año del sistema). No hay que tocarlo.
 
-## 9. Cuidados al escribir
+## 10. Cuidados al escribir
 
 - **No inventar métricas.** Si no tenés el dato real ("−2 h por día"), describí el cambio.
 - **Permiso del cliente.** Para mostrar un sitio o una planilla de un cliente, pedí autorización,

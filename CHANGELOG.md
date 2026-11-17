@@ -3,6 +3,40 @@
 Todos los cambios relevantes del sitio. Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/),
 versionado semántico.
 
+## [1.4.0] — 2026-11-16
+
+### Agregado
+- **Sección Porta reseñas** (`#porta-resenas`, después de Servicios): muestra el producto con
+  cuatro placas —una personalizada de Barber Fort y tres estilos base (Google, WhatsApp,
+  Instagram)—, una franja de especificaciones y un cierre con CTA a WhatsApp.
+- **Marco de acrílico en CSS**: degradés, brillo diagonal y espesor de la placa dibujados con
+  `::before`/`::after`, con inclinación que se endereza al pasar el mouse. El arte impreso va
+  adentro como WebP de 800 × 1200 (`assets/img/porta/`), así el diseño se ve limpio —sin los
+  rayones ni los reflejos de las fotos del mostrador— y cambiar una placa es reemplazar un archivo.
+- **Giro de las placas**: al tocar cada placa del porta reseñas se da vuelta y muestra el dorso,
+  con el chip NFC pegado detrás del punto de apoyo. Como el dorso está espejado, el chip aparece a
+  la derecha: es el mismo lugar físico donde se apoya el celular del otro lado. Reemplaza a la
+  vista explotada, que no se leía como objeto.
+- **Generador de QR propio** (`scripts/gen-qr.mjs`): implementación de QR modelo 2 (modo byte,
+  corrección L) sin dependencias, con zona de silencio incluida. Los SVG quedan en
+  `assets/img/qr/` para las placas de clientes y el futuro personalizador.
+- **Test del generador** (`scripts/verify-qr.mjs`): compara la matriz con la de un generador
+  externo módulo a módulo.
+- **Enlace** desde la tarjeta de servicio "Reseñas y presencia local" a la nueva sección.
+
+### Cambiado
+- Documentación: `arquitectura.md` (marco en CSS + arte en imagen, árbol y puntos de extensión),
+  `manual-de-contenido.md` (cómo reemplazar una placa, generar un QR y sumar precio) y
+  `responsive.md` (comportamiento de la grilla de placas).
+
+### Corregido
+- **Comparador del Excel**: la línea divisoria pasa a rojo con borde blanco, el tirador es un
+  círculo rojo con anillo y un halo que pulsa hasta el primer toque, y la pista dice "Arrastrá la
+  línea". Antes era una línea blanca sobre una planilla blanca: no se veía que hubiera algo para
+  arrastrar.
+- **Resumen semanal**: vuelve a ser un comparador antes/después como el de la planilla, con la
+  captura vieja recortada al bloque de totales para que las dos se puedan leer en el mismo marco.
+
 ## [1.3.0] — 2026-11-09
 
 ### Agregado

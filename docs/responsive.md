@@ -19,9 +19,11 @@ Reglas generales:
 |---|---|
 | `≤ 1200px` | Los chips flotantes del hero se acercan al panel |
 | `≤ 1080px` | Se oculta la maqueta decorativa de servicios y los chips flotantes |
+| `≤ 1000px` | Porta reseñas en 2 columnas · especificaciones en 2×2 |
 | `≤ 980px` | Hero a una columna · stats en 2×2 · servicios en 2 columnas · proceso en 2 · casos en 1 · caso Excel apilado · nosotros en 1 · FAQ en 1 (sin sticky) · contacto en 1 · footer en 2 |
 | `≤ 860px` | El nav reemplaza los links por el botón hamburguesa; se oculta el CTA del nav |
 | `≤ 720px` | Servicios, proceso y footer en 1 columna · listas de caso en 1 columna · formulario en 1 columna · botones de caso a ancho completo · inputs a 16 px |
+| `≤ 560px` | Porta reseñas en 1 columna (máx. 330 px) · sin inclinación 3D · especificaciones en 1 columna · CTA del producto apilado |
 | `≤ 520px` | Hero más compacto · panel de flujo sin etiquetas laterales · pestañas del Excel más chicas · comparador a sangre |
 | `≤ 420px` | Gutter más chico · botones del hero a ancho completo |
 | `≤ 380px` | Marca y paddings de tarjetas reducidos |
@@ -61,12 +63,24 @@ Además hay dos consultas por **capacidad**, no por ancho:
 - En móvil, el botón "Visitar el sitio" ocupa todo el ancho y la URL se centra debajo.
 
 ### Comparador antes/después
-- Mantiene su proporción (16:9 para la planilla, 4:3 para el resumen) y usa `object-fit: contain`,
-  así que nunca se deforma ni recorta información.
+- Los dos comparadores mantienen la proporción de sus capturas (16:9 la planilla, 1,18:1 el
+  resumen) y usan `object-fit: contain`, así que nunca se deforman ni recortan información.
 - En pantallas de menos de 520 px las capturas se ven chicas: es el compromiso de mostrar la
   hoja completa. Se puede hacer pinch-zoom en el celular (no está bloqueado).
 - El `range` invisible tiene `touch-action: pan-y`: el arrastre horizontal mueve el comparador y
   el vertical sigue scrolleando la página.
+
+### Porta reseñas
+- Cuatro placas que pasan a 2 columnas bajo 1000 px y a 1 columna bajo 560 px (con un máximo de
+  330 px para que la placa no se estire de más).
+- Cada placa es una imagen 2:3 con `width`/`height` declarados: el layout reserva el alto y no salta
+  al cargar. El marco de acrílico la acompaña en cualquier ancho, sin media queries.
+- Bajo 560 px se desactiva la inclinación del acrílico: en pantalla chica el efecto resta
+  legibilidad y suma repintados.
+- El hover que endereza la placa está limitado a `@media (hover: hover) and (min-width: 561px)`,
+  así que no queda "pegado" en táctil.
+- El giro de las placas es un `rotateY(180deg)` con `perspective: 1000px`; se dispara con un toque,
+  no depende del hover.
 
 ### Formulario
 - Una columna por debajo de 720 px.
@@ -90,6 +104,7 @@ Además hay dos consultas por **capacidad**, no por ancho:
 | Altura del menú con la barra del navegador | `100dvh` |
 | Notch / barra de gestos | `env(safe-area-inset-bottom)` |
 | Imágenes deformadas | `aspect-ratio` + `object-fit` |
+| Placas que se deforman al cambiar de ancho | Proporción fija 2:3 + `width`/`height` en la `<img>` |
 | Capturas de distinta proporción | Recorte previo al mismo ratio (caso resumen del Excel) |
 
 ## 5. Matriz de prueba

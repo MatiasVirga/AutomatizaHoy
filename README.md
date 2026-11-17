@@ -14,7 +14,10 @@ AutomatizaHoy/
 │   ├── js/main.js          # Interacciones: menú, reveal, contadores, comparador, formulario
 │   └── img/
 │       ├── ...             # Capturas y logos de Barber Fort y Citroën
+│       ├── qr/             # QR del porta reseñas (SVG, generados)
+│       ├── porta/          # Arte de las cuatro placas del porta reseñas
 │       └── excel/          # Antes/después del Excel (planilla y resumen)
+├── scripts/                # build.mjs (arma dist/) + gen-qr.mjs + verify-qr.mjs
 ├── docs/                   # Documentación (ver tabla abajo) + material de referencia
 ├── CHANGELOG.md
 └── README.md
@@ -61,7 +64,10 @@ Al pegar el número, **todos** los botones de la web se actualizan solos.
 - **Animaciones**: scroll reveal con `IntersectionObserver`, contadores, marquee infinito,
   spotlight en tarjetas, navbar con blur al scrollear, barra de progreso y acordeón animado.
 - **Comparador antes/después**: sin librerías, con `clip-path` y `input[type=range]`; dos vistas
-  (planilla diaria y resumen semanal).
+  (planilla diaria y resumen semanal), con línea divisoria en rojo para que se entienda el arrastre.
+- **Porta reseñas**: marco de acrílico dibujado en CSS (degradés, brillo y espesor) con la placa
+  impresa adentro como WebP 2:3; la inclinación se endereza al pasar el mouse. Los QR del arte
+  salen de `scripts/gen-qr.mjs`.
 - **Accesibilidad**: HTML semántico, skip link, `aria-expanded`, pestañas con teclado y foco visible.
 - **SEO**: metadatos, Open Graph y JSON-LD (`ProfessionalService`).
 

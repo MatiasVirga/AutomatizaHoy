@@ -11,6 +11,8 @@
 - [x] `canonical` y `og:url` apuntan a `https://automatizahoy.com.ar/`.
 - [ ] Se probó en celular, tablet y desktop (ver [responsive.md](responsive.md)).
 - [ ] El formulario abre WhatsApp o el mail con el mensaje armado.
+- [ ] Las placas del porta reseñas giran al tocarlas y muestran el dorso con el chip.
+- [ ] Los dos comparadores del Excel se arrastran con el dedo y la línea se ve sobre la planilla.
 - [ ] No hay errores en la consola del navegador.
 - [ ] Los archivos pesan lo razonable (ideal: menos de 1 MB en la primera carga).
 
@@ -114,6 +116,13 @@ Si más adelante conectás un repo de Git, configurá:
 
 Windows no distingue mayúsculas en los nombres de archivo, pero los servidores Linux **sí**.
 Mantené todo en minúsculas (`assets/img/excel/...`) para que no se rompa al publicar.
+
+### Cuidado al reescribir archivos con la terminal
+
+Reemplazar texto con PowerShell o `sed` puede cambiar la codificación sin avisar: un archivo UTF-8
+se relee como ANSI y las "á" terminan como "Ã¡" en todo el HTML. Editá `index.html` con un editor
+que respete UTF-8, y si hacés un reemplazo masivo, verificá después que sigan apareciendo bien
+palabras con tilde y `—`.
 
 ## 6. Después de publicar
 
