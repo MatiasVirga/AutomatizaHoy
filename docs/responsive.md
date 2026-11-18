@@ -19,7 +19,7 @@ Reglas generales:
 |---|---|
 | `≤ 1200px` | Los chips flotantes del hero se acercan al panel |
 | `≤ 1080px` | Se oculta la maqueta decorativa de servicios y los chips flotantes |
-| `≤ 1000px` | Porta reseñas en 2 columnas · especificaciones en 2×2 |
+| `≤ 1120px` | Porta reseñas en 2 columnas centradas (máx. 760 px) · especificaciones en 2×2 |
 | `≤ 980px` | Hero a una columna · stats en 2×2 · servicios en 2 columnas · proceso en 2 · casos en 1 · caso Excel apilado · nosotros en 1 · FAQ en 1 (sin sticky) · contacto en 1 · footer en 2 |
 | `≤ 860px` | El nav reemplaza los links por el botón hamburguesa; se oculta el CTA del nav |
 | `≤ 720px` | Servicios, proceso y footer en 1 columna · listas de caso en 1 columna · formulario en 1 columna · botones de caso a ancho completo · inputs a 16 px |
@@ -71,16 +71,18 @@ Además hay dos consultas por **capacidad**, no por ancho:
   el vertical sigue scrolleando la página.
 
 ### Porta reseñas
-- Cuatro placas que pasan a 2 columnas bajo 1000 px y a 1 columna bajo 560 px (con un máximo de
-  330 px para que la placa no se estire de más).
+- Cuatro placas: 4 columnas arriba de 1120 px, 2 columnas con la placa centrada (tope de 380 px)
+  hasta 560 px, y 1 columna (tope de 330 px) en celular. El tope va en la placa y no en la grilla
+  para que las columnas sigan alineadas con el título y la franja de especificaciones. Con ese
+  corte el ancho real de placa va de 244 a 380 px en todo el rango de pantallas.
 - Cada placa es una imagen 2:3 con `width`/`height` declarados: el layout reserva el alto y no salta
   al cargar. El marco de acrílico la acompaña en cualquier ancho, sin media queries.
-- Bajo 560 px se desactiva la inclinación del acrílico: en pantalla chica el efecto resta
-  legibilidad y suma repintados.
+- Bajo 560 px se desactiva la inclinación del acrílico y se apaga el `backdrop-filter` del botón de
+  giro: en pantalla chica el efecto resta legibilidad y suma repintados.
 - El hover que endereza la placa está limitado a `@media (hover: hover) and (min-width: 561px)`,
   así que no queda "pegado" en táctil.
-- El giro de las placas es un `rotateY(180deg)` con `perspective: 1000px`; se dispara con un toque,
-  no depende del hover.
+- El giro es un `rotateY(180deg)` con `perspective: 1000px` y `touch-action: manipulation`: se
+  dispara con un toque, sin esperar el doble toque de iOS y sin depender del hover.
 
 ### Formulario
 - Una columna por debajo de 720 px.

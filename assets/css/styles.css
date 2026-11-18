@@ -2338,6 +2338,10 @@ ol { list-style: none; }
   aspect-ratio: 2 / 3;
   perspective: 1000px;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Sin esto, iOS espera el doble toque y el giro se siente lento */
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -2346,17 +2350,21 @@ ol { list-style: none; }
   inset: 0;
   display: block;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform .8s var(--ease);
+  will-change: transform;
 }
 
 .porta__flip.is-flipped .porta__inner { transform: rotateY(180deg); }
 
+/* El rotateY(0) explícito evita el fantasma de la cara de atrás en Safari.
+   Sin overflow: los hijos van con inset 0 y el borde lo redondea el propio box. */
 .porta__face {
   position: absolute;
   inset: 0;
   display: block;
   border-radius: 4px;
-  overflow: hidden;
+  transform: rotateY(0deg);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -2366,6 +2374,9 @@ ol { list-style: none; }
   height: 100%;
   object-fit: cover;
   box-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 /* --- El dorso: acrílico con el chip pegado --- */
@@ -2381,6 +2392,8 @@ ol { list-style: none; }
   content: "";
   position: absolute;
   inset: 0;
+  /* Sin overflow en la cara, el brillo recorta sus propias esquinas */
+  border-radius: 4px;
   background: linear-gradient(118deg,
       rgba(255, 255, 255, 0) 32%,
       rgba(255, 255, 255, .12) 46%,
@@ -2566,15 +2579,28 @@ ol { list-style: none; }
 }
 
 /* --- Responsive del componente --- */
-@media (max-width: 1000px) {
-  .porta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; }
+/* Cuatro columnas solo cuando cada tarjeta supera los ~240 px; si no, dos
+   columnas con la placa centrada y un tope de 380 px. El tope va en la placa
+   y no en la grilla para que las columnas sigan alineadas con el título y la
+   franja de especificaciones. */
+@media (max-width: 1120px) {
+  .porta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 24px;
+  }
+
+  .porta {
+    max-width: 380px;
+    margin-inline: auto;
+  }
+
   .porta-specs { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 560px) {
   .porta-grid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
+    gap: 26px;
     max-width: 330px;
     margin-inline: auto;
   }
@@ -2588,10 +2614,30 @@ ol { list-style: none; }
 
   .porta__glass::after { display: none; }
 
+  /* El desenfoque del vidrio cuesta caro en celulares y acá no suma nada */
+  .porta__hint {
+    width: 30px;
+    height: 30px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(11, 13, 16, .62);
+  }
+
+  .porta__hint .icon { width: 15px; height: 15px; }
+
   .porta-specs { grid-template-columns: 1fr; }
+
+  .porta-specs li { padding: 18px 16px; }
 
   .porta-cta { flex-direction: column; align-items: stretch; }
   .porta-cta .btn { width: 100%; }
+}
+
+/* Teléfonos chicos: menos aire para que la sección no se haga eterna.
+   El texto de los epígrafes no se achica: 13 px es el mínimo legible. */
+@media (max-width: 400px) {
+  .porta-grid { gap: 22px; }
+  .porta__cap { gap: 3px; }
 }
 
 /* ============================ ANIMACIONES =============================== */
