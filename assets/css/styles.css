@@ -2582,7 +2582,9 @@ ol { list-style: none; }
 /* Cuatro columnas solo cuando cada tarjeta supera los ~240 px; si no, dos
    columnas con la placa centrada y un tope de 380 px. El tope va en la placa
    y no en la grilla para que las columnas sigan alineadas con el título y la
-   franja de especificaciones. */
+   franja de especificaciones.
+   OJO: con márgenes automáticos la placa deja de estirarse y toma el ancho de
+   su epígrafe (una quedaba de 317 px y otra de 237). Por eso lleva width: 100%. */
 @media (max-width: 1120px) {
   .porta-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2590,6 +2592,7 @@ ol { list-style: none; }
   }
 
   .porta {
+    width: 100%;
     max-width: 380px;
     margin-inline: auto;
   }

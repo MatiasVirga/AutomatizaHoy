@@ -75,6 +75,9 @@ Además hay dos consultas por **capacidad**, no por ancho:
   hasta 560 px, y 1 columna (tope de 330 px) en celular. El tope va en la placa y no en la grilla
   para que las columnas sigan alineadas con el título y la franja de especificaciones. Con ese
   corte el ancho real de placa va de 244 a 380 px en todo el rango de pantallas.
+- Las placas llevan `width: 100%` junto al `max-width`: un ítem de grilla con márgenes automáticos
+  deja de estirarse y toma el ancho de su contenido, así que cada placa quedaba del ancho de su
+  propio epígrafe (una de 317 px al lado de otra de 237 px).
 - Cada placa es una imagen 2:3 con `width`/`height` declarados: el layout reserva el alto y no salta
   al cargar. El marco de acrílico la acompaña en cualquier ancho, sin media queries.
 - Bajo 560 px se desactiva la inclinación del acrílico y se apaga el `backdrop-filter` del botón de
