@@ -31,10 +31,10 @@ AutomatizaHoy/
 │       ├── qr/                    # QR del porta reseñas (SVG generados)
 │       ├── porta/                 # Arte de las cuatro placas (WebP 800x1200)
 │       └── excel/
-│           ├── planilla-antes.png
-│           ├── planilla-despues.png
+│           ├── planilla-antes.webp
+│           ├── planilla-despues.webp
 │           ├── resumen-antes.png
-│           └── resumen-despues.png
+│           └── resumen-despues.webp
 ├── scripts/
 │   ├── build.mjs                 # Arma dist/ con lo que se publica
 │   ├── gen-qr.mjs                # Genera los SVG de assets/img/qr/

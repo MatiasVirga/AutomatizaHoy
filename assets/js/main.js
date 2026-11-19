@@ -316,8 +316,15 @@ const CONFIG = {
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          links.forEach((l) => l.classList.remove("is-active"));
-          map.get(entry.target)?.classList.add("is-active");
+          links.forEach((l) => {
+            l.classList.remove("is-active");
+            l.removeAttribute("aria-current");
+          });
+          const activo = map.get(entry.target);
+          if (activo) {
+            activo.classList.add("is-active");
+            activo.setAttribute("aria-current", "true");
+          }
         });
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 }

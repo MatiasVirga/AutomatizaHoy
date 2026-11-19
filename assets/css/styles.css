@@ -75,6 +75,9 @@ a { color: inherit; }
 
 button { font: inherit; color: inherit; }
 
+/* Cortes de línea más parejos donde el navegador lo soporta (si no, se ignora) */
+p { text-wrap: pretty; }
+
 ul,
 ol { list-style: none; }
 

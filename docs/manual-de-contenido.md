@@ -60,10 +60,10 @@ Archivos en `assets/img/excel/`:
 
 | Archivo | Qué muestra | Dónde se usa |
 |---|---|---|
-| `planilla-antes.png` | La planilla vieja | Comparador de "Planilla diaria" (1919×1079) |
-| `planilla-despues.png` | La planilla nueva | Comparador de "Planilla diaria" (1909×1079) |
+| `planilla-antes.webp` | La planilla vieja | Comparador de "Planilla diaria" (1919×1079) |
+| `planilla-despues.webp` | La planilla nueva | Comparador de "Planilla diaria" (1909×1079) |
 | `resumen-antes.png` | El resumen viejo | Comparador de "Resumen semanal" (420×356) |
-| `resumen-despues.png` | El resumen nuevo | Comparador de "Resumen semanal" (1006×853) |
+| `resumen-despues.webp` | El resumen nuevo | Comparador de "Resumen semanal" (1006×853) |
 
 Recomendaciones:
 
