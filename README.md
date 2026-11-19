@@ -79,9 +79,8 @@ Al pegar el número, **todos** los botones de la web se actualizan solos.
       ve con todos los totales en $0 y pierde fuerza al lado del "antes".
 - [ ] Definir el refresh del isotipo (ver [brand/](brand/README.md)) y usarlo en el header, el
       favicon y el avatar de Instagram: hoy el sitio muestra un rayo y el logo es la A con flecha.
-- [ ] Reactivar el caso **Barber Fort** cuando el sitio esté publicado: hoy la tarjeta está
-      comentada en `index.html`. Para volver atrás, descomentarla, sacarle `case--wide` a la
-      tarjeta de Citroën y actualizar el hero de "1 sitio" a "2 sitios".
+- [ ] Definir precio y plazo del porta reseñas: la sección no muestra precio y la FAQ todavía no
+      tiene preguntas del producto.
 
 ## Publicar
 

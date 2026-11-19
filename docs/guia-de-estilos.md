@@ -60,6 +60,11 @@ en las tarjetas de casos, `#141A22` en el panel de contacto, `#080A0D` en el foo
 - Secciones: `padding: var(--section-y) 0` con `--section-y: clamp(72px, 8vw, 124px)`.
 - Grillas: `gap` de 18–22 px entre tarjetas, 26–28 px en layouts de dos columnas.
 - Padding interno de tarjeta: 28–30 px en desktop, 20–24 px en móvil.
+- **Numeración editorial**: cada sección lleva `.eyebrow__num` (01–08) después del punto, y el
+  número cierra con una raya corta (`::after` de 12 × 1 px): queda `• 01 — SOLUCIONES`. El hero es
+  el 01 (portada) y el orden sigue el del documento: Servicios 02, Porta reseñas 03, Proceso 04,
+  Casos 05, Nosotros 06, FAQ 07, Contacto 08. Si se agrega una sección en el medio, hay que
+  renumerar las siguientes.
 
 ## 5. Formas y profundidad
 

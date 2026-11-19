@@ -227,6 +227,24 @@ ol { list-style: none; }
   animation: pulse 2.6s ease-in-out infinite;
 }
 
+/* Número de sección: • 01 — SOLUCIONES */
+.eyebrow__num {
+  font-family: "Sora", "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: .04em;
+  opacity: .85;
+}
+
+.eyebrow__num::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 1px;
+  margin: 0 0 3px 10px;
+  background: currentColor;
+  opacity: .45;
+}
+
 .checklist {
   display: flex;
   flex-direction: column;
