@@ -1196,6 +1196,96 @@ ol { list-style: none; }
   border: 1px solid rgba(255, 255, 255, .05);
 }
 
+.svc__mock--review {
+  right: -8px;
+  bottom: -14px;
+  transform: rotate(2deg);
+}
+
+.svc:hover .svc__mock--review {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.review-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.review-mini__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-mini__stars {
+  color: #FBBF24;
+  font-size: .8rem;
+  letter-spacing: 1.5px;
+}
+
+.review-mini__score {
+  font-family: "Sora", sans-serif;
+  font-size: .7rem;
+  font-weight: 700;
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(251, 191, 36, .2);
+}
+
+.review-mini__author {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.review-mini__avatar {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #4285F4;
+  color: #fff;
+  font-weight: 700;
+  font-size: .7rem;
+}
+
+.review-mini__author strong {
+  display: block;
+  font-size: .72rem;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.review-mini__author small {
+  display: block;
+  font-size: .62rem;
+  color: #94A3B8;
+}
+
+.review-mini__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: rgba(225, 29, 60, .14);
+  color: var(--red-3);
+  font-size: .62rem;
+  font-weight: 600;
+}
+
+.review-mini__tag .icon {
+  width: 11px;
+  height: 11px;
+}
+
 /* ============================ 8. PROCESO ================================= */
 .steps {
   display: grid;

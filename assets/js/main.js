@@ -529,7 +529,6 @@ const CONFIG = {
     initScrollUI();
     initMobileMenu();
     initReveal();
-    initTypewriter();
     initCounters();
     initAccordion();
     initSpotlight();
